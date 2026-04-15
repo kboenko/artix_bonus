@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create_bonus_history
+      author: Konstantin Boenko
+      changes:
+        - createTable:
+            tableName: bonus_history
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: amount
+                  type: bigint
+              - column:
+                  name: operation_date
+                  type: timestamp with time zone
+              - column:
+                  name: card_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: card_bonus_hiostory_fk
+                    referencedTableName: card
+                    referencedColumnNames: id
