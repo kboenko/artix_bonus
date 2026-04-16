@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_indices_to_card
+      author: Konstantin Boenko
+      changes:
+        - createIndex:
+            indexName: idx_card_id
+            tableName: card
+            unique: true
+            columns:
+              - column: {name: id}
+        - createIndex:
+            indexName: idx_card_number
+            tableName: card
+            unique: true
+            columns:
+              - column: {name: number}

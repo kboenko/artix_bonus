@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_indices_to_card_user
+      author: Konstantin Boenko
+      changes:
+        - createIndex:
+            indexName: idx_card_user_id
+            tableName: card_user
+            unique: true
+            columns:
+              - column: {name: id}
+        - createIndex:
+            indexName: idx_card_user_login
+            tableName: card_user
+            unique: true
+            columns:
+              - column: {name: login}

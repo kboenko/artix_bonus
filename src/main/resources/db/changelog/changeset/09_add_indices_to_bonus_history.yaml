@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: add_indices_to_bonus_history
+      author: Konstantin Boenko
+      changes:
+        - createIndex:
+            indexName: idx_bonus_history_id
+            tableName: bonus_history
+            unique: true
+            columns:
+              - column: {name: id}
+        - createIndex:
+            indexName: idx_bonus_history_card_id
+            tableName: bonus_history
+            unique: true
+            columns:
+              - column: {name: card_id}

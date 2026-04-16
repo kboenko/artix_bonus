@@ -9,3 +9,11 @@ databaseChangeLog:
       file: db\changelog\changeset\04_create_bonus_history_table.yaml
   - include:
       file: db\changelog\changeset\05_alter_card_user_table.yaml
+  - include:
+      file: db\changelog\changeset\06_add_indices_to_card_user.yaml
+  - include:
+      file: db\changelog\changeset\07_add_indices_to_card.yaml
+  - include:
+      file: db\changelog\changeset\08_add_indices_to_bonus.yaml
+  - include:
+      file: db\changelog\changeset\09_add_indices_to_bonus_history.yaml
