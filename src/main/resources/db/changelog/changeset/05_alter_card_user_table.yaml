@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: alter_card_user
+      author: Konstantin Boenko
+      changes:
+        - addColumn:
+            tableName: card_user
+            columns:
+              - column:
+                  name: login
+                  type: varchar(30)
+              - column:
+                  name: password
+                  type: varchar(100)

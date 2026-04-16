@@ -1,11 +1,11 @@
 package com.artix.test.bonus.controller;
 
-import com.artix.test.bonus.dto.response.GetBalanceResponse;
 import com.artix.test.bonus.service.BonusService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +20,7 @@ public class BonusController {
      * Начисление бонусов
      */
     @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> add(String cardNumber, Long amount) {
         log.info("Начисление бонусов");
         bonusService.addBonus(cardNumber, amount);
@@ -30,6 +31,7 @@ public class BonusController {
      * Списание бонусов
      */
     @RequestMapping(value = "/off", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> writeOff(String cardNumber, Long amount) {
         log.info("Списание бонусов");
         bonusService.writeOffBonus(cardNumber, amount);
@@ -46,19 +48,10 @@ public class BonusController {
      * (значит, он должник, и следующее начисление будет делаться уже с учетом этого долга).
      */
     @RequestMapping(value = "/back", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> returnBack(String cardNumber, Long amount, boolean isNeedAdd) {
         log.info("Возврат списанных бонусов");
         bonusService.returnBonus(cardNumber, amount, isNeedAdd);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    /**
-     * Получение баланса бонусов на карте
-     * @return
-     */
-    @RequestMapping(value = "/balance/{cardNumber}", method = RequestMethod.GET)
-    public @ResponseBody GetBalanceResponse getBalance(@PathVariable String cardNumber) {
-        log.info("Запрос баланса по номеру карты {}",cardNumber);
-        return bonusService.getBalanceByCardNumber(cardNumber);
     }
 }

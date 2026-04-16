@@ -23,4 +23,10 @@ public class CardUser {
 
     @Column
     String role;
+
+    @Column
+    String login;
+
+    @Column
+    String password;
 }
